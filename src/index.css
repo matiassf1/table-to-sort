@@ -5,7 +5,7 @@
 }
 
 /* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Cabin&family=Roboto+Condensed:wght@400;700&display=swap");
 
 html {
   font-size: 100%;
@@ -44,8 +44,8 @@ html {
   --green-dark: #0f5132;
 
   /* fonts  */
-  --headingFont: 'Roboto Condensed', Sans-Serif;
-  --bodyFont: 'Cabin', Sans-Serif;
+  --headingFont: "Roboto Condensed", Sans-Serif;
+  --bodyFont: "Cabin", Sans-Serif;
   --small-text: 0.875rem;
   --extra-small-text: 0.7em;
   /* rest of the vars */
@@ -330,7 +330,6 @@ ul {
   text-transform: capitalize;
 }
 
-
 .content {
   display: flex;
   flex-direction: column;
@@ -357,20 +356,25 @@ ul {
 }
 
 /* Table Styles */
-/* Agrega los estilos para la tabla y los encabezados de columna con iconos */
 
 .styled-table {
   width: 100%;
-  border-collapse: collapse;
-  background-color: var(--white);
-  border-radius: var(--borderRadius);
+  background: var(--white);
+  border-radius: calc(var(--borderRadius) * 2);
   box-shadow: var(--shadow-2);
+  padding: 2rem 2.5rem;
+  margin: 3rem auto;
+  transition: var(--transition);
 }
-
+.styled-table:hover {
+  box-shadow: var(--shadow-4);
+}
 .styled-table thead th {
   padding: 1rem;
+  border-radius: var(--borderRadius);
   text-align: center;
   background-color: var(--primary-500);
+  transition: var(--transition);
   color: var(--white);
 }
 
@@ -387,18 +391,7 @@ ul {
   border-bottom: none;
 }
 
-.column-sort {
-  display: flex;
-  flex-direction: row;
-  align-content: center;
-  justify-content: center;
-}
-.sort-icon {
-  width: 10px;
-  height: 10px;
-  margin-left: 5px;
-  margin-top: 3px;
-  background-size: cover;
+.sort-column {
   cursor: pointer;
 }
 /* Agrega las animaciones no invasivas y bien vistas */

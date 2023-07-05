@@ -43,7 +43,7 @@ export const App = () => {
         <>
           <span>{userList?.length} Users.</span>
           <SearchContainer />
-          <Table data={userList} />
+          <Table users={userList} />
         </>
       )}
     </div>

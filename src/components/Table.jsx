@@ -1,31 +1,63 @@
+import PropTypes from "prop-types";
 import {
   AiOutlineSortAscending,
   AiOutlineSortDescending,
 } from "react-icons/ai";
 
-export const Table = () => {
+export const Table = ({ users }) => {
   return (
     <table className="styled-table">
       <thead>
         <tr>
-          <th>Column 1</th>
-          <th className="column-sort">
-            Column 2
-            <span className="sort-icon">
+        <th className="sort-column">
+
+            ID
+            <span>
               <AiOutlineSortAscending />
             </span>
           </th>
-          <th>Column 3</th>
-          <th className="column-sort">
-            Column 4
-            <span className="sort-icon">
+          <th className="sort-column">
+
+            Name
+            <span>
+              <AiOutlineSortAscending />
+            </span>
+          </th>
+          <th>Username</th>
+          <th className="sort-column">
+            City
+            <span>
               <AiOutlineSortDescending />
             </span>
           </th>
+          <th>Email</th>
+          <th>Company</th>
         </tr>
       </thead>
       <tbody>
-        <tr>
+        {/* ID, Name, Username, Email, City, and Company. */}
+        {users.map(
+          ({
+            id,
+            name,
+            username,
+            email,
+            address: { city },
+            company: { name: companyName },
+          }) => {
+            return (
+              <tr key={id}>
+                <td>{id}</td>
+                <td>{name}</td>
+                <td>{username}</td>
+                <td>{city}</td>
+                <td>{email}</td>
+                <td>{companyName}</td>
+              </tr>
+            );
+          }
+        )}
+        {/* <tr>
           <td>Data 1</td>
           <td>Data 2</td>
           <td>Data 3</td>
@@ -36,9 +68,12 @@ export const Table = () => {
           <td>Data 6</td>
           <td>Data 7</td>
           <td>Data 8</td>
-        </tr>
-        {/* Add more rows as needed */}
+        </tr> */}
       </tbody>
     </table>
   );
+};
+
+Table.propTypes = {
+  users: PropTypes.array.isRequired,
 };
