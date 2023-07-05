@@ -457,6 +457,7 @@ table {
     padding: 1rem;
     flex-direction: column;
     border-radius: calc(var(--borderRadius) * 1.2);
+    display: flex;
   }
 }
 
