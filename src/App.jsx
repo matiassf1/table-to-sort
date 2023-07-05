@@ -12,12 +12,13 @@ export const App = () => {
       try {
         setIsLoading(true);
         const resp = await fetch(
-          `https://jsonplaceholder.typicode.com/users/0`
+          `https://jsonplaceholder.typicode.com/users`
         );
         const data = await resp.json();
         if (!resp.ok) {
           throw new Error(data.message || "Error in the request");
         }
+        setError(null);
         setuserList(data);
       } catch (error) {
         setError(error.message);
@@ -34,13 +35,14 @@ export const App = () => {
   return (
     <div className="content">
       <h2>Hello - App!</h2>
-      {!error ? (
+      {error ? (
         // <Error message={error} />
         <span>{error}</span>
       ) : (
         <>
           <span>{userList?.length} Users.</span>
-          <Table />
+          Search
+          <Table data={userList} />
         </>
       )}
     </div>
