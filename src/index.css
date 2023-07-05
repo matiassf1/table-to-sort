@@ -219,7 +219,19 @@ ul {
   box-shadow: var(--shadow-2);
   padding: 2rem 2.5rem;
   margin: 3rem auto;
+  transition: var(--transition);  width: 90vw;
+  max-width: var(--fixed-width);
+  background: var(--white);
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-2);
+  padding: 2rem 2.5rem;
+  margin: 3rem auto;
   transition: var(--transition);
+}
+@media (max-width: 767.98px) {
+  .form {
+    margin: 1rem auto;
+  }
 }
 .form:hover {
   box-shadow: var(--shadow-4);
@@ -330,13 +342,6 @@ ul {
   text-transform: capitalize;
 }
 
-.content {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  gap: 10px;
-}
-
 .page-header {
   text-align: center;
   margin: 2rem;
@@ -356,44 +361,118 @@ ul {
 }
 
 /* Table Styles */
-
-.styled-table {
-  transition: var(--transition);
-  max-width: var(--max-width);
+.wrapper-table {
   width: 100%;
+  margin-inline: auto;
+}
+.table-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+table {
+  width: 100%;
+  font-size: small;
+}
+.styled-table {
   background: var(--white);
   border-radius: calc(var(--borderRadius) * 2);
   box-shadow: var(--shadow-2);
   padding: 2rem 2.5rem;
-  margin: 3rem auto;
 }
 .styled-table:hover {
   box-shadow: var(--shadow-4);
 }
 .styled-table thead th {
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: var(--borderRadius);
   text-align: center;
   background-color: var(--primary-500);
-  transition: var(--transition);
   color: var(--white);
 }
 
 .styled-table thead th i {
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .styled-table tbody td {
   padding: 1rem;
-  border-bottom: 1px solid var(--grey-200);
+  text-align: center;
+}
+
+.styled-table tbody tr {
+  background-color: var(--grey-100);
 }
 
 .styled-table tbody tr:last-child td {
   border-bottom: none;
 }
+.styled-table tbody tr:nth-child(even) {
+  background-color: var(--grey-50);
+}
+
+@media screen and (max-width: 761px) {
+  .styled-table {
+    padding: 1rem;
+  }
+  .styled-table thead {
+    display: none;
+  }
+  .styled-table tbody td {
+    display: grid;
+    grid-template-columns: 15ch auto;
+    gap: 1rem;
+    padding: 0.2rem;
+    text-align: center;
+  }
+  .styled-table tbody td::before {
+    content: attr(data-cell) ": ";
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  .styled-table tbody tr {
+    padding: 1rem;
+    flex-direction: column;
+    border-radius: calc(var(--borderRadius) * 1.2);
+    display: flex;
+  }
+}
+
+@media (min-width: 761px) and (max-width: 968px) {
+  .styled-table {
+    padding: 1rem;
+  }
+  .styled-table thead {
+    display: none;
+  }
+  .styled-table tbody td {
+    display: grid;
+    grid-template-columns: 40ch auto;
+    gap: 1rem;
+    padding: 0.2rem;
+    text-align: center;
+  }
+  .styled-table tbody td::before {
+    content: attr(data-cell) ": ";
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+  .styled-table tbody tr {
+    padding: 1rem;
+    flex-direction: column;
+    border-radius: calc(var(--borderRadius) * 1.2);
+  }
+}
 
 .sort-column {
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.sort-column span {
+  margin-top: 5px;
 }
 /* Agrega las animaciones no invasivas y bien vistas */
 
