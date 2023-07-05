@@ -358,13 +358,14 @@ ul {
 /* Table Styles */
 
 .styled-table {
+  transition: var(--transition);
+  max-width: var(--max-width);
   width: 100%;
   background: var(--white);
   border-radius: calc(var(--borderRadius) * 2);
   box-shadow: var(--shadow-2);
   padding: 2rem 2.5rem;
   margin: 3rem auto;
-  transition: var(--transition);
 }
 .styled-table:hover {
   box-shadow: var(--shadow-4);

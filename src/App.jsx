@@ -1,33 +1,15 @@
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Table, Loading } from "./components";
 import { SearchContainer } from "./components/SearchContainer";
+import { UserContext } from "./context/UserContext";
 
 export const App = () => {
-  const [userList, setuserList] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetchData();
-    async function fetchData() {
-      try {
-        setIsLoading(true);
-        const resp = await fetch(
-          `https://jsonplaceholder.typicode.com/users`
-        );
-        const data = await resp.json();
-        if (!resp.ok) {
-          throw new Error(data.message || "Error in the request");
-        }
-        setError(null);
-        setuserList(data);
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setIsLoading(false);
-      }
-    }
-  }, []);
+  const {
+    isLoading,
+    error,
+    userList
+  } = useContext(UserContext)
 
   if (isLoading) {
     return <Loading center={true} />;
