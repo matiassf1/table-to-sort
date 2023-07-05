@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table, Loading } from "./components";
+import { SearchContainer } from "./components/SearchContainer";
 
 export const App = () => {
   const [userList, setuserList] = useState([]);
@@ -33,7 +34,7 @@ export const App = () => {
   }
 
   return (
-    <div className="content">
+    <div className="page-header">
       <h2>Hello - App!</h2>
       {error ? (
         // <Error message={error} />
@@ -41,7 +42,7 @@ export const App = () => {
       ) : (
         <>
           <span>{userList?.length} Users.</span>
-          Search
+          <SearchContainer />
           <Table data={userList} />
         </>
       )}

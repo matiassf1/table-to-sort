@@ -5,7 +5,7 @@ import {
 
 export const Table = () => {
   return (
-    <table className="table">
+    <table className="styled-table">
       <thead>
         <tr>
           <th>Column 1</th>
