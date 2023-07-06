@@ -23,11 +23,11 @@ your ability to create user-friendly interfaces using best practices in front-en
 
    ## Technical Requirements:
 
-7. Tools: You can use HTML, CSS, and JavaScript. You're free to choose any framework like React,
+1. Tools: You can use HTML, CSS, and JavaScript. You're free to choose any framework like React,
    Angular, Vue.js or even vanilla JS as per your comfort.
-8. Error Handling: Implement appropriate error handling for the API request.
-9. Best Practices: Adhere to the best practices for accessibility and SEO.
-10. Code Quality: Write clean, readable, and well-documented code.
+2. Error Handling: Implement appropriate error handling for the API request.
+3. Best Practices: Adhere to the best practices for accessibility and SEO.
+4. Code Quality: Write clean, readable, and well-documented code.
 
 ---
 
