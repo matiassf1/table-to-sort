@@ -23,20 +23,18 @@ your ability to create user-friendly interfaces using best practices in front-en
 
    ## Technical Requirements:
 
-1. Tools: You can use HTML, CSS, and JavaScript. You're free to choose any framework like React,
+- Tools: You can use HTML, CSS, and JavaScript. You're free to choose any framework like React,
    Angular, Vue.js or even vanilla JS as per your comfort.
-2. Error Handling: Implement appropriate error handling for the API request.
-3. Best Practices: Adhere to the best practices for accessibility and SEO.
-4. Code Quality: Write clean, readable, and well-documented code.
+- Error Handling: Implement appropriate error handling for the API request.
+- Best Practices: Adhere to the best practices for accessibility and SEO.
+- Code Quality: Write clean, readable, and well-documented code.
 
 ---
 
-** 
 Submission: Please provide a link to a GitHub repository containing your code for this project. Include a
  README that explains how to run the project locally. You can host the application using any free hosting
  provider (like Netlify, Vercel, or GitHub pages) and provide the live URL. Also please include images and
  recordings in the mail
-**
     
 ## Evaluation: Your project will be evaluated based on the following criteria:
 
