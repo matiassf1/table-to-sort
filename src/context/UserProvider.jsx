@@ -38,7 +38,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const handleSearch = () => {
-    
+
   }
 
   const contextValue = {
@@ -46,7 +46,8 @@ export const UserProvider = ({ children }) => {
     userList,
     isLoading,
     error,
-    handleSort
+    handleSort,
+    handleSearch
   };
 
   return (
