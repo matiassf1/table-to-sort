@@ -1,74 +1,62 @@
 export const arraySort = (array, sortType, byProp) => {
-    const callbackSort = sortByProp(sortType, byProp)
-    const arraySorted = [...array].sort(callbackSort);
-    return arraySorted
-}
-
-function sortByProp(sortType, byProp) {
-    let callbackSort;
+    const compareFunction = sortByProp(sortType, byProp);
+    const arraySorted = [...array].sort(compareFunction);
+    return arraySorted;
+  };
+  
+  function sortByProp(sortType, byProp) {
+    let compareFunction;
     if (byProp === 'id') {
-        if (sortType) {
-            callbackSort = fromLowestNumSort(byProp);
-        }
-        if (!sortType) {
-            callbackSort = fromHighestNumSort(byProp);
-        }
+      if (sortType) {
+        compareFunction = createDescendingNumericSortFunction(byProp);
+      } else {
+        compareFunction = createAscendingNumericSortFunction(byProp);
+      }
+    } else {
+      if (sortType) {
+        compareFunction = createCompareFunction(byProp, true);
+      } else {
+        compareFunction = createCompareFunction(byProp, false);
+      }
     }
-    else {
-        if (sortType) {
-            callbackSort = aZSort(byProp);
-        }
-        if (!sortType) {
-            callbackSort = zASort(byProp);
-        }
-    }
-
-    return callbackSort;
-}
-
-function fromLowestNumSort(thirdVal) {
+    return compareFunction;
+  }
+  
+  function createDescendingNumericSortFunction(byProp) {
     return function (firstVal, secondVal) {
-        return firstVal[thirdVal] - secondVal[thirdVal]
-    }
-}
-function fromHighestNumSort(thirdVal) {
+      return firstVal[byProp] - secondVal[byProp];
+    };
+  }
+  
+  function createAscendingNumericSortFunction(byProp) {
     return function (firstVal, secondVal) {
-        return secondVal[thirdVal] - firstVal[thirdVal]
+      return secondVal[byProp] - firstVal[byProp];
+    };
+  }
+  
+  function createCompareFunction(byProp, ascending) {
+    if (byProp !== 'company' && byProp === 'city') {
+      return function (firstVal, secondVal) {
+        return ascending
+          ? firstVal[byProp]?.localeCompare(secondVal[byProp])
+          : secondVal[byProp]?.localeCompare(firstVal[byProp]);
+      };
     }
-}
-function zASort(thirdVal) {
-
-    if (thirdVal !== 'city' && thirdVal !== 'company') {
-        return function (firstVal, secondVal) { return secondVal[thirdVal].localeCompare(firstVal[thirdVal]) }
+  
+    if (byProp === 'city') {
+      return function (firstVal, secondVal) {
+        return ascending
+          ? firstVal['address'][byProp]?.localeCompare(secondVal['address'][byProp])
+          : secondVal['address'][byProp]?.localeCompare(firstVal['address'][byProp]);
+      };
     }
-    if (thirdVal === 'city') {
-        return function (firstVal, secondVal) {
-            //to access address:{ city : 'cityName'}
-            return secondVal['address'][thirdVal]?.localeCompare(firstVal['address'][thirdVal]);
-        }
+  
+    if (byProp === 'company') {
+      return function (firstVal, secondVal) {
+        return ascending
+          ? firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name'])
+          : secondVal[byProp]['name']?.localeCompare(firstVal[byProp]['name']);
+      };
     }
-    if (thirdVal === 'company') {
-        return function (firstVal, secondVal) {
-            //to access company:{ name : 'companyName'}
-            return secondVal[thirdVal]['name']?.localeCompare(firstVal[thirdVal]['name']);
-        }
-    }
-
-}
-function aZSort(thirdVal) {
-    if (thirdVal !== 'city' && thirdVal !== 'company') {
-        return function (firstVal, secondVal) { return firstVal[thirdVal].localeCompare(secondVal[thirdVal]) }
-    }
-    if (thirdVal === 'city') {
-        return function (firstVal, secondVal) {
-            //to access address:{ city : 'cityName'}
-            return firstVal['address'][thirdVal]?.localeCompare(secondVal['address'][thirdVal]);
-        }
-    }
-    if (thirdVal === 'company') {
-        return function (firstVal, secondVal) {
-            //to access company:{ name : 'companyName'}
-            return firstVal[thirdVal]['name']?.localeCompare(secondVal[thirdVal]['name']);
-        }
-    }
-}
+  }
+  
