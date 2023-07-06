@@ -1,27 +1,27 @@
 export const arraySort = (array, sortType, byProp) => {
-    const callbackSort = sortByProp(sortType, byProp)
-    const arraySorted = [...array].sort(callbackSort);
+    const compareFunction = sortByProp(sortType, byProp)
+    const arraySorted = [...array].sort(compareFunction);
     return arraySorted
 }
 
 function sortByProp(sortType, byProp) {
-    let callbackSort;
+    let compareFunction;
     if (byProp === 'id') {
         if (sortType) {
-            callbackSort = createDescendingNumericSortFunction(byProp);
+            compareFunction = createDescendingNumericSortFunction(byProp);
         } else {
-            callbackSort = createAscendingNumericSortFunction(byProp);
+            compareFunction = createAscendingNumericSortFunction(byProp);
         }
     }
     else {
         if (!sortType) {
-            callbackSort = zASort(byProp);
+            compareFunction = zASort(byProp);
         } else {
-            callbackSort = aZSort(byProp);
+            compareFunction = aZSort(byProp);
         }
     }
 
-    return callbackSort;
+    return compareFunction;
 }
 
 function createDescendingNumericSortFunction(thirdVal) {
