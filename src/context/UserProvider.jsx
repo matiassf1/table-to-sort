@@ -35,7 +35,6 @@ export const UserProvider = ({ children }) => {
   const handleSort = () => {
     const newUserList = arraySort(userList, sortState.fromTop, sortState.type);
     setuserList(newUserList);
-    console.log([...newUserList]);
   };
 
   const handleSearch = () => {};

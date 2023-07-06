@@ -14,7 +14,7 @@ function sortByProp(sortType, byProp) {
             callbackSort = fromHighestNumSort(byProp);
         }
     }
-    if (byProp) {
+    else {
         if (sortType) {
             callbackSort = aZSort(byProp);
         }
@@ -37,18 +37,38 @@ function fromHighestNumSort(thirdVal) {
     }
 }
 function zASort(thirdVal) {
-    return function (firstVal, secondVal) {
-        if (thirdVal === 'city') {
+
+    if (thirdVal !== 'city' && thirdVal !== 'company') {
+        return function (firstVal, secondVal) { return secondVal[thirdVal].localeCompare(firstVal[thirdVal]) }
+    }
+    if (thirdVal === 'city') {
+        return function (firstVal, secondVal) {
+            //to access address:{ city : 'cityName'}
             return secondVal['address'][thirdVal]?.localeCompare(firstVal['address'][thirdVal]);
         }
-        return secondVal[thirdVal]?.localeCompare(firstVal[thirdVal])
     }
+    if (thirdVal === 'company') {
+        return function (firstVal, secondVal) {
+            //to access company:{ name : 'companyName'}
+            return secondVal[thirdVal]['name']?.localeCompare(firstVal[thirdVal]['name']);
+        }
+    }
+
 }
 function aZSort(thirdVal) {
-    return function (firstVal, secondVal) {
-        if (thirdVal === 'city') {
+    if (thirdVal !== 'city' && thirdVal !== 'company') {
+        return function (firstVal, secondVal) { return firstVal[thirdVal].localeCompare(secondVal[thirdVal]) }
+    }
+    if (thirdVal === 'city') {
+        return function (firstVal, secondVal) {
+            //to access address:{ city : 'cityName'}
             return firstVal['address'][thirdVal]?.localeCompare(secondVal['address'][thirdVal]);
         }
-        return firstVal[thirdVal]?.localeCompare(secondVal[thirdVal])
+    }
+    if (thirdVal === 'company') {
+        return function (firstVal, secondVal) {
+            //to access company:{ name : 'companyName'}
+            return firstVal[thirdVal]['name']?.localeCompare(secondVal[thirdVal]['name']);
+        }
     }
 }

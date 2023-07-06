@@ -34,6 +34,7 @@ export const Table = () => {
 
   useEffect(() => {
     handleSort();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortState]);
 
   return (
@@ -103,7 +104,6 @@ export const Table = () => {
               </div>
             </th>
             <th>
-              {" "}
               <div
                 className="sort-column"
                 onClick={() => onChangeSort("email")}
@@ -121,7 +121,6 @@ export const Table = () => {
               </div>
             </th>
             <th>
-              {" "}
               <div
                 className="sort-column"
                 onClick={() => onChangeSort("company")}
