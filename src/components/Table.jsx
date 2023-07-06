@@ -33,8 +33,10 @@ export const Table = () => {
   };
 
   useEffect(() => {
-    handleSort();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (sortState.type !== null) {
+      handleSort();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortState]);
 
   return (

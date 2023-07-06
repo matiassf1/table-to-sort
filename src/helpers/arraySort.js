@@ -1,29 +1,27 @@
 export const arraySort = (array, sortType, byProp) => {
-    const compareFunction = sortByProp(sortType, byProp)
-    const arraySorted = [...array].sort(compareFunction);
+    const callbackSort = sortByProp(sortType, byProp)
+    const arraySorted = [...array].sort(callbackSort);
     return arraySorted
 }
 
 function sortByProp(sortType, byProp) {
-    let compareFunction;
+    let callbackSort;
     if (byProp === 'id') {
         if (sortType) {
-            compareFunction = createDescendingNumericSortFunction(byProp);
-        }
-        else {
-            compareFunction = createAscendingNumericSortFunction(byProp);
+            callbackSort = createDescendingNumericSortFunction(byProp);
+        } else {
+            callbackSort = createAscendingNumericSortFunction(byProp);
         }
     }
     else {
-        if (sortType) {
-            compareFunction = zASort(byProp);
-        }
-        else {
-            compareFunction = aZSort(byProp);
+        if (!sortType) {
+            callbackSort = zASort(byProp);
+        } else {
+            callbackSort = aZSort(byProp);
         }
     }
 
-    return compareFunction;
+    return callbackSort;
 }
 
 function createDescendingNumericSortFunction(thirdVal) {
@@ -46,40 +44,22 @@ function aZSort(thirdVal) {
 }
 
 function createCompareFunction(byProp, ascending) {
+
     if (byProp !== 'company' && byProp !== 'city') {
-        if (ascending) {
-            return function (firstVal, secondVal) {
-                return firstVal[byProp]?.localeCompare(secondVal[byProp]);
-            }
-        } else {
-            return function (firstVal, secondVal) {
-                return secondVal[byProp]?.localeCompare(firstVal[byProp]);
-            }
-        }
+        return ascending
+            ? (firstVal, secondVal) => firstVal[byProp]?.localeCompare(secondVal[byProp])
+            : (firstVal, secondVal) => secondVal[byProp]?.localeCompare(firstVal[byProp]);
     }
 
     if (byProp === 'city') {
-        if (ascending) {
-            console.log('ascending');
-            return function (firstVal, secondVal) {
-                return firstVal['address'][byProp]?.localeCompare(secondVal['address'][byProp]);
-            }
-        } else {
-            return function (firstVal, secondVal) {
-                return secondVal['address'][byProp]?.localeCompare(firstVal['address'][byProp]);
-            }
-        }
+        return ascending
+            ? (firstVal, secondVal) => firstVal['address'][byProp]?.localeCompare(secondVal['address'][byProp])
+            : (firstVal, secondVal) => secondVal['address'][byProp]?.localeCompare(firstVal['address'][byProp]);
     }
 
     if (byProp === 'company') {
-        if (ascending) {
-            return function (firstVal, secondVal) {
-                return firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name']);
-            }
-        } else {
-            return function (firstVal, secondVal) {
-                return secondVal[byProp]['name']?.localeCompare(firstVal[byProp]['name']);
-            }
-        }
+        return ascending
+            ? (firstVal, secondVal) => firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name'])
+            : (firstVal, secondVal) => firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name']);
     }
 }
