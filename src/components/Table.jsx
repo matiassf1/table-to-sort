@@ -1,46 +1,147 @@
-import PropTypes from "prop-types";
 import {
-  AiOutlineSortAscending,
-  AiOutlineSortDescending,
-} from "react-icons/ai";
+  BsSortAlphaDown,
+  BsSortAlphaDownAlt,
+  BsSortNumericDown,
+  BsSortNumericDownAlt,
+} from "react-icons/bs";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
 
-export const Table = ({ users }) => {
+export const Table = () => {
+  const {
+    handleSort,
+    setSortState,
+    sortState,
+    userList: users,
+  } = useContext(UserContext);
+
+  const onChangeSort = (sortType) => {
+    if (sortState.type === sortType) {
+      setSortState({
+        type: sortType,
+        fromTop: !sortState.fromTop,
+      });
+      // handleSort();
+      return;
+    }
+    setSortState({
+      type: sortType,
+      fromTop: true,
+    });
+    // handleSort();
+    return;
+  };
+
+  useEffect(() => {
+    handleSort();
+  }, [sortState]);
+
   return (
     <div className="table-container">
       <table className="styled-table">
         <thead>
           <tr>
             <th>
-              <div className="sort-column">
+              {/* TODO: Crear un componente tdSort para encapsular este codigo repetitivo seria algo asi <TdSort handleClick={blabla} columnName={blabla}/> */}
+              <div className="sort-column" onClick={() => onChangeSort("id")}>
                 ID
                 <span>
-                  <AiOutlineSortAscending />
+                  {sortState.type === "id" && sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortNumericDown />
+                    ) : (
+                      <BsSortNumericDownAlt />
+                    )
+                  ) : null}
                 </span>
               </div>
             </th>
             <th>
-              <div className="sort-column">
+              <div className="sort-column" onClick={() => onChangeSort("name")}>
                 Name
                 <span>
-                  <AiOutlineSortAscending />
+                  {sortState.type === "name" && sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortAlphaDown />
+                    ) : (
+                      <BsSortAlphaDownAlt />
+                    )
+                  ) : null}
                 </span>
               </div>
             </th>
-            <th>Username</th>
             <th>
-              <div className="sort-column">
+              <div
+                className="sort-column"
+                onClick={() => onChangeSort("username")}
+              >
+                Username
+                <span>
+                  {sortState.type === "username" &&
+                  sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortAlphaDown />
+                    ) : (
+                      <BsSortAlphaDownAlt />
+                    )
+                  ) : null}
+                </span>
+              </div>
+            </th>
+            <th>
+              <div className="sort-column" onClick={() => onChangeSort("city")}>
                 City
                 <span>
-                  <AiOutlineSortDescending />
+                  {sortState.type === "city" && sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortAlphaDown />
+                    ) : (
+                      <BsSortAlphaDownAlt />
+                    )
+                  ) : null}
                 </span>
               </div>
             </th>
-            <th>Email</th>
-            <th>Company</th>
+            <th>
+              {" "}
+              <div
+                className="sort-column"
+                onClick={() => onChangeSort("email")}
+              >
+                Email
+                <span>
+                  {sortState.type === "email" && sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortAlphaDown />
+                    ) : (
+                      <BsSortAlphaDownAlt />
+                    )
+                  ) : null}
+                </span>
+              </div>
+            </th>
+            <th>
+              {" "}
+              <div
+                className="sort-column"
+                onClick={() => onChangeSort("company")}
+              >
+                Company
+                <span>
+                  {sortState.type === "company" &&
+                  sortState.fromTop !== null ? (
+                    sortState.fromTop === true ? (
+                      <BsSortAlphaDown />
+                    ) : (
+                      <BsSortAlphaDownAlt />
+                    )
+                  ) : null}
+                </span>
+              </div>
+            </th>
           </tr>
         </thead>
         <tbody>
-          {/* ID, Name, Username, Email, City, and Company. */}
           {users.map(
             ({
               id,
@@ -52,34 +153,18 @@ export const Table = ({ users }) => {
             }) => {
               return (
                 <tr key={id}>
-                  <td data-cell="ID" >{id}</td>
-                  <td data-cell="Name" >{name}</td>
-                  <td data-cell="Username" >{username}</td>
-                  <td data-cell="City" >{city}</td>
-                  <td data-cell="Email" >{email}</td>
+                  <td data-cell="ID">{id}</td>
+                  <td data-cell="Name">{name}</td>
+                  <td data-cell="Username">{username}</td>
+                  <td data-cell="City">{city}</td>
+                  <td data-cell="Email">{email}</td>
                   <td data-cell="Company">{companyName}</td>
                 </tr>
               );
             }
           )}
-          {/* <tr>
-          <td>Data 1</td>
-          <td>Data 2</td>
-          <td>Data 3</td>
-          <td>Data 4</td>
-        </tr>
-        <tr>
-          <td>Data 5</td>
-          <td>Data 6</td>
-          <td>Data 7</td>
-          <td>Data 8</td>
-        </tr> */}
         </tbody>
       </table>
     </div>
   );
-};
-
-Table.propTypes = {
-  users: PropTypes.array.isRequired,
 };

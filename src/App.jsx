@@ -22,7 +22,7 @@ export const App = () => {
         <SearchContainer />
       </div>
       <div className="wrapper-table">
-        <Table users={userList} />
+        <Table />
       </div>
     </>
   );

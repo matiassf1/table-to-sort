@@ -471,6 +471,7 @@ table {
 }
 .sort-column span {
   margin-top: 5px;
+  font-size: large;
 }
 /* Agrega las animaciones no invasivas y bien vistas */
 

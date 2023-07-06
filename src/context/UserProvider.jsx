@@ -7,6 +7,11 @@ export const UserProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  const [sortState, setSortState] = useState({
+    type: null,
+    fromTop: null,
+  });
+
   const fetchUsers = useMemo(async () => {
     try {
       setIsLoading(true);
@@ -27,19 +32,13 @@ export const UserProvider = ({ children }) => {
   //but here we could add something like the search to include it in the url of the request and
   //have it as a dependency to update the list of users.
 
-  const handleSort = (sortType) => {
-    setIsLoading(true);
-    if(sortType !== '1-9' && sortType !== '9-1' && sortType !== 'Z-A' && sortType !== 'A-Z'){
-      return console.error(sortType,'Invalid sortType');
-    }
-    const newUserList = arraySort(userList, sortType);
+  const handleSort = () => {
+    const newUserList = arraySort(userList, sortState.fromTop, sortState.type);
     setuserList(newUserList);
-    setIsLoading(false);
+    console.log([...newUserList]);
   };
 
-  const handleSearch = () => {
-
-  }
+  const handleSearch = () => {};
 
   const contextValue = {
     fetchUsers,
@@ -47,7 +46,9 @@ export const UserProvider = ({ children }) => {
     isLoading,
     error,
     handleSort,
-    handleSearch
+    handleSearch,
+    setSortState,
+    sortState
   };
 
   return (
