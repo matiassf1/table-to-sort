@@ -17,7 +17,7 @@ export const SearchContainer = () => {
     e.preventDefault();
     onResetForm();
     setError(null);
-    setSearchList(null);
+    setSearchList([]);
   };
   return (
     <>

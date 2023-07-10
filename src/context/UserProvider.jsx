@@ -3,7 +3,7 @@ import { UserContext } from "./UserContext";
 import { useMemo, useState } from "react";
 import { arraySort } from "../helpers/arraySort";
 export const UserProvider = ({ children }) => {
-  const [userList, setuserList] = useState(null);
+  const [userList, setUserList] = useState(null);
   const [searchList, setSearchList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -22,7 +22,7 @@ export const UserProvider = ({ children }) => {
         throw new Error(data.message || "Error in the request");
       }
       setError(null);
-      setuserList(data);
+      setUserList(data);
     } catch (error) {
       setError(error.message);
     } finally {
@@ -35,14 +35,27 @@ export const UserProvider = ({ children }) => {
   //have it as a dependency to update the list of users.
 
   const handleSort = () => {
-    const newUserList = arraySort(userList, sortState.fromTop, sortState.type);
-    setuserList(newUserList);
+    if (searchList?.length >= 1) {
+      const newUserList = arraySort(
+        searchList,
+        sortState.fromTop,
+        sortState.type
+      );
+      setSearchList(newUserList);
+    } else {
+      const newUserList = arraySort(
+        userList,
+        sortState.fromTop,
+        sortState.type
+      );
+      setUserList(newUserList);
+    }
   };
 
   const handleSearch = (search, columnName = "name") => {
     if (search.length === 0) {
-      setSearchList(null);
-      setError('Put something to search')
+      setSearchList([]);
+      setError("Put something to search");
     }
     const newUserList = userList.filter((user) =>
       user[columnName]?.toLowerCase().startsWith(search)
@@ -67,7 +80,7 @@ export const UserProvider = ({ children }) => {
     sortState,
     searchList,
     setSearchList,
-    setError
+    setError,
   };
 
   return (
