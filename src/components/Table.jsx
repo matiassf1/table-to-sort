@@ -6,17 +6,13 @@ import {
 } from "react-icons/bs";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
+import { SpanSort } from "./";
 
 export const Table = () => {
-  const {
-    handleSort,
-    setSortState,
-    sortState,
-    userList,
-    searchList,
-  } = useContext(UserContext);
+  const { handleSort, setSortState, sortState, userList, searchList } =
+    useContext(UserContext);
 
-  const users = searchList || userList
+  const users = searchList || userList;
 
   const onChangeSort = (sortType) => {
     if (sortState.type === sortType) {
@@ -24,14 +20,12 @@ export const Table = () => {
         type: sortType,
         fromTop: !sortState.fromTop,
       });
-      // handleSort();
       return;
     }
     setSortState({
       type: sortType,
       fromTop: true,
     });
-    // handleSort();
     return;
   };
 
@@ -48,32 +42,31 @@ export const Table = () => {
         <thead>
           <tr>
             <th>
-              {/* TODO: Crear un componente tdSort para encapsular este codigo repetitivo seria algo asi <TdSort handleClick={blabla} columnName={blabla}/> */}
               <div className="sort-column" onClick={() => onChangeSort("id")}>
                 ID
-                <span>
-                  {sortState.type === "id" && sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortNumericDown />
-                    ) : (
-                      <BsSortNumericDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"id"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortNumericDown key="lowest" />,
+                    <BsSortNumericDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
             <th>
               <div className="sort-column" onClick={() => onChangeSort("name")}>
                 Name
-                <span>
-                  {sortState.type === "name" && sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortAlphaDown />
-                    ) : (
-                      <BsSortAlphaDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"name"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortAlphaDown key="lowest" />,
+                    <BsSortAlphaDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
             <th>
@@ -82,30 +75,29 @@ export const Table = () => {
                 onClick={() => onChangeSort("username")}
               >
                 Username
-                <span>
-                  {sortState.type === "username" &&
-                  sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortAlphaDown />
-                    ) : (
-                      <BsSortAlphaDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"username"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortAlphaDown key="lowest" />,
+                    <BsSortAlphaDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
             <th>
               <div className="sort-column" onClick={() => onChangeSort("city")}>
                 City
-                <span>
-                  {sortState.type === "city" && sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortAlphaDown />
-                    ) : (
-                      <BsSortAlphaDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"city"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortAlphaDown key="lowest" />,
+                    <BsSortAlphaDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
             <th>
@@ -114,15 +106,15 @@ export const Table = () => {
                 onClick={() => onChangeSort("email")}
               >
                 Email
-                <span>
-                  {sortState.type === "email" && sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortAlphaDown />
-                    ) : (
-                      <BsSortAlphaDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"email"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortAlphaDown key="lowest" />,
+                    <BsSortAlphaDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
             <th>
@@ -131,16 +123,15 @@ export const Table = () => {
                 onClick={() => onChangeSort("company")}
               >
                 Company
-                <span>
-                  {sortState.type === "company" &&
-                  sortState.fromTop !== null ? (
-                    sortState.fromTop === true ? (
-                      <BsSortAlphaDown />
-                    ) : (
-                      <BsSortAlphaDownAlt />
-                    )
-                  ) : null}
-                </span>
+                <SpanSort
+                  name={"company"}
+                  type={sortState.type}
+                  fromTop={sortState.fromTop}
+                  icons={[
+                    <BsSortAlphaDown key="lowest" />,
+                    <BsSortAlphaDownAlt key="highest" />,
+                  ]}
+                />
               </div>
             </th>
           </tr>

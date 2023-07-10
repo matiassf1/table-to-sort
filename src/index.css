@@ -380,6 +380,7 @@ table {
 }
 
 .styled-table thead th {
+  text-transform: capitalize;
   padding: 0.8rem;
   border-radius: var(--borderRadius);
   text-align: center;
