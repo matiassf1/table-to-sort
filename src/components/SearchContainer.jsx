@@ -1,21 +1,29 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useForm } from "../hooks";
 import { FormRow } from "./";
+import { UserContext } from "../context/UserContext";
 
 export const SearchContainer = () => {
   const { search, onInputChange } = useForm({ search: "" });
+
+  const { handleSearch, setSearchList } = useContext(UserContext);
 
   useEffect(() => {
     // providerByContext
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('hi');
+    handleSearch(search)
   }
+
+  const clearValues = (e) => {
+    e.preventDefault();
+    setSearchList(null);
+  };
   return (
     <>
-      <form className="form">
+      <form className="form" onSubmit={handleSubmit}>
         <h5 className="start">Search Form</h5>
         <div className="form-center">
           <FormRow
@@ -29,7 +37,7 @@ export const SearchContainer = () => {
             type="button"
             className="btn"
             // disabled={isLoading}
-            onClick={handleSearch}
+            onClick={clearValues}
           >
             clear filters
           </button>

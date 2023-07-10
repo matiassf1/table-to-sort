@@ -12,8 +12,11 @@ export const Table = () => {
     handleSort,
     setSortState,
     sortState,
-    userList: users,
+    userList,
+    searchList,
   } = useContext(UserContext);
+
+  const users = searchList || userList
 
   const onChangeSort = (sortType) => {
     if (sortState.type === sortType) {

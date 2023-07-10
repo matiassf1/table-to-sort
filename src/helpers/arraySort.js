@@ -60,6 +60,6 @@ function createCompareFunction(byProp, ascending) {
     if (byProp === 'company') {
         return ascending
             ? (firstVal, secondVal) => firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name'])
-            : (firstVal, secondVal) => firstVal[byProp]['name']?.localeCompare(secondVal[byProp]['name']);
+            : (firstVal, secondVal) => secondVal[byProp]['name']?.localeCompare(firstVal[byProp]['name']);
     }
 }

@@ -4,20 +4,21 @@ import { SearchContainer } from "./components/SearchContainer";
 import { UserContext } from "./context/UserContext";
 
 export const App = () => {
-  const { isLoading, error, userList } = useContext(UserContext);
+  const { isLoading, userList } = useContext(UserContext);
 
   if (isLoading) {
     return <Loading center={true} />;
   }
 
-  if (error) {
-    return <span>{error}</span>; // <Error message={error} />
-  }
+  // if (error) {
+  //   return <span>{error}</span>; // <Error message={error} />
+  // }
+  // moving on toast or something like that
 
   return (
     <>
       <div className="page-header">
-        <h2>EL TAXI POR TU CASA!</h2>
+        <h2>Ordena como quieras mostro</h2>
         <span>{userList?.length} Users.</span>
         <SearchContainer />
       </div>
