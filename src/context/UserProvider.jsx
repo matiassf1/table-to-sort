@@ -42,14 +42,17 @@ export const UserProvider = ({ children }) => {
   const handleSearch = (search, columnName = "name") => {
     if (search.length === 0) {
       setSearchList(null);
+      setError('Put something to search')
     }
     const newUserList = userList.filter((user) =>
       user[columnName]?.toLowerCase().startsWith(search)
     );
     if (newUserList.length === 0) {
       setError("User Not Found");
+      setSearchList([]);
       return;
     }
+    setError(null);
     setSearchList(newUserList);
   };
 
@@ -64,6 +67,7 @@ export const UserProvider = ({ children }) => {
     sortState,
     searchList,
     setSearchList,
+    setError
   };
 
   return (
