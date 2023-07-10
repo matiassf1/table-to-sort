@@ -28,7 +28,7 @@ export const SearchContainer = () => {
         <div className="form-center">
           <FormRow
             type="text"
-            labelText="search any user"
+            labelText="search by name"
             name="search"
             value={search}
             onInputChange={onInputChange}
@@ -39,7 +39,7 @@ export const SearchContainer = () => {
             // disabled={isLoading}
             onClick={clearValues}
           >
-            clear filters
+            clear values
           </button>
         </div>
       </form>
