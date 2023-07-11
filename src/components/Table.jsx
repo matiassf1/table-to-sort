@@ -6,25 +6,24 @@ import {
 } from "react-icons/bs";
 import { useContext, useEffect } from "react";
 import { UserContext } from "../context/UserContext";
-import { SpanSort } from "./";
+import { SpanSort } from "./SpanSort";
 
 export const Table = () => {
   const { handleSort, setSortState, sortState, userList, searchList } =
     useContext(UserContext);
-
   const users = searchList?.length >= 1 ? searchList : userList;
 
   const onChangeSort = (sortType) => {
     if (sortState.type === sortType) {
       setSortState({
         type: sortType,
-        fromTop: !sortState.fromTop,
+        ascending: !sortState.ascending,
       });
       return;
     }
     setSortState({
       type: sortType,
-      fromTop: true,
+      ascending: true,
     });
     return;
   };
@@ -47,7 +46,7 @@ export const Table = () => {
                 <SpanSort
                   name={"id"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortNumericDown key="lowest" />,
                     <BsSortNumericDownAlt key="highest" />,
@@ -61,7 +60,7 @@ export const Table = () => {
                 <SpanSort
                   name={"name"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortAlphaDown key="lowest" />,
                     <BsSortAlphaDownAlt key="highest" />,
@@ -78,7 +77,7 @@ export const Table = () => {
                 <SpanSort
                   name={"username"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortAlphaDown key="lowest" />,
                     <BsSortAlphaDownAlt key="highest" />,
@@ -92,7 +91,7 @@ export const Table = () => {
                 <SpanSort
                   name={"city"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortAlphaDown key="lowest" />,
                     <BsSortAlphaDownAlt key="highest" />,
@@ -109,7 +108,7 @@ export const Table = () => {
                 <SpanSort
                   name={"email"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortAlphaDown key="lowest" />,
                     <BsSortAlphaDownAlt key="highest" />,
@@ -126,7 +125,7 @@ export const Table = () => {
                 <SpanSort
                   name={"company"}
                   type={sortState.type}
-                  fromTop={sortState.fromTop}
+                  ascending={sortState.ascending}
                   icons={[
                     <BsSortAlphaDown key="lowest" />,
                     <BsSortAlphaDownAlt key="highest" />,
@@ -137,7 +136,7 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map(
+          {users?.map(
             ({
               id,
               name,

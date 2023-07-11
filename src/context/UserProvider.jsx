@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { UserContext } from "./UserContext";
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { arraySort } from "../helpers/arraySort";
 export const UserProvider = ({ children }) => {
   const [userList, setUserList] = useState(null);
@@ -10,10 +10,11 @@ export const UserProvider = ({ children }) => {
 
   const [sortState, setSortState] = useState({
     type: null,
-    fromTop: null,
+    ascending: null,
   });
 
-  const fetchUsers = useMemo(async () => {
+ useEffect(() => {
+  const fetchUsers = async () => {
     try {
       setIsLoading(true);
       const resp = await fetch(`https://jsonplaceholder.typicode.com/users`);
@@ -25,28 +26,29 @@ export const UserProvider = ({ children }) => {
       setUserList(data);
     } catch (error) {
       setError(error.message);
-    } finally {
+    }
+    finally {
       setIsLoading(false);
     }
-  }, []);
+  }
 
-  //as we are working with the array obtained from a single fetch we don't need to add any dependency,
-  //but here we could add something like the search to include it in the url of the request and
-  //have it as a dependency to update the list of users.
+  fetchUsers();
+ }, []);
+ 
 
   const handleSort = () => {
     if (searchList?.length >= 1) {
       const newUserList = arraySort(
         searchList,
-        sortState.fromTop,
-        sortState.type
+        sortState.type,
+        sortState.ascending
       );
       setSearchList(newUserList);
     } else {
       const newUserList = arraySort(
         userList,
-        sortState.fromTop,
-        sortState.type
+        sortState.type,
+        sortState.ascending
       );
       setUserList(newUserList);
     }
@@ -70,7 +72,6 @@ export const UserProvider = ({ children }) => {
   };
 
   const contextValue = {
-    fetchUsers,
     userList,
     isLoading,
     error,

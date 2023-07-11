@@ -1,10 +1,10 @@
 import PropTypes from "prop-types";
 
-export const SpanSort = ({ name, type, fromTop, icons }) => {
+export const SpanSort = ({ name, type, ascending, icons }) => {
   return (
     <span>
-      {type === name && fromTop !== null ? (
-        fromTop ? (
+      {type === name && ascending !== null ? (
+        ascending ? (
             icons[0]
         ) : (
           icons[1]
@@ -17,6 +17,6 @@ export const SpanSort = ({ name, type, fromTop, icons }) => {
 SpanSort.propTypes = {
   name: PropTypes.string.isRequired,
   type: PropTypes.string,
-  fromTop: PropTypes.bool,
+  ascending: PropTypes.bool,
   icons: PropTypes.array
 };

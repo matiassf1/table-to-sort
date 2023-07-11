@@ -6,10 +6,6 @@ import { UserContext } from "./context/UserContext";
 export const App = () => {
   const { isLoading, userList, error } = useContext(UserContext);
 
-  if (isLoading) {
-    return <Loading center={true} />;
-  }
-
   return (
     <>
       <div className="page-header">
@@ -17,9 +13,17 @@ export const App = () => {
         <span>{userList?.length} Users.</span>
         <SearchContainer />
       </div>
-      <div className="wrapper-table">
-        {error ? <div className="alert alert-danger">{error}</div> : <Table />}
-      </div>
+      {isLoading ? (
+        <Loading center={true} />
+      ) : ( 
+        <div className="wrapper-table">
+          {error ? (
+            <div className="alert alert-danger">{error}</div>
+          ) : (
+            <Table />
+          )}
+        </div>
+      )}
     </>
   );
 };
