@@ -1,24 +1,31 @@
-import { useContext } from "react";
+/* eslint-disable react/display-name */
+import React, { useContext, useCallback } from "react";
 import { useForm } from "../hooks";
 import { FormRow } from "./";
 import { UserContext } from "../context/UserContext";
 
-export const SearchContainer = () => {
+export const SearchContainer = React.memo(() => {
   const { search, onInputChange, onResetForm } = useForm({ search: "" });
 
   const { handleSearch, setSearchList, setError } = useContext(UserContext);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleSearch(search)
-  }
+  const handleSubmit = useCallback(
+    (e) => {
+      e.preventDefault();
+      handleSearch(search);
+    },
+    [search, handleSearch]
+  );
 
-  const clearValues = (e) => {
-    e.preventDefault();
-    onResetForm();
-    setError(null);
-    setSearchList([]);
-  };
+  const clearValues = useCallback(
+    (e) => {
+      e.preventDefault();
+      onResetForm();
+      setError(null);
+      setSearchList([]);
+    },
+    [onResetForm, setError, setSearchList]
+  );
   return (
     <>
       <form className="form" onSubmit={handleSubmit}>
@@ -43,4 +50,4 @@ export const SearchContainer = () => {
       </form>
     </>
   );
-};
+});

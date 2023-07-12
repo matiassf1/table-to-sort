@@ -12,29 +12,7 @@ export const UserProvider = ({ children }) => {
     type: null,
     ascending: null,
   });
-
- useEffect(() => {
-  const fetchUsers = async () => {
-    try {
-      setIsLoading(true);
-      const resp = await fetch(`https://jsonplaceholder.typicode.com/users`);
-      const data = await resp.json();
-      if (!resp.ok) {
-        throw new Error(data.message || "Error in the request");
-      }
-      setError(null);
-      setUserList(data);
-    } catch (error) {
-      setError(error.message);
-    }
-    finally {
-      setIsLoading(false);
-    }
-  }
-
-  fetchUsers();
- }, []);
- 
+  console.log("2");
 
   const handleSort = () => {
     if (searchList?.length >= 1) {
@@ -70,7 +48,27 @@ export const UserProvider = ({ children }) => {
     setError(null);
     setSearchList(newUserList);
   };
+  useEffect(() => {
+    const fetchUsers = async () => {
+      console.log("1");
+      try {
+        setIsLoading(true);
+        const resp = await fetch(`https://jsonplaceholder.typicode.com/users`);
+        const data = await resp.json();
+        if (!resp.ok) {
+          throw new Error(data.message || "Error in the request");
+        }
+        setError(null);
+        setUserList(data);
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
+    fetchUsers();
+  }, []);
   const contextValue = {
     userList,
     isLoading,

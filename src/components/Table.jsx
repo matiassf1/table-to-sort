@@ -1,40 +1,41 @@
+/* eslint-disable react/display-name */
+import React, { useCallback, useContext, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
+import { SpanSort } from "./SpanSort";
+import PropTypes from "prop-types";
 import {
   BsSortAlphaDown,
   BsSortAlphaDownAlt,
   BsSortNumericDown,
   BsSortNumericDownAlt,
 } from "react-icons/bs";
-import { useContext, useEffect } from "react";
-import { UserContext } from "../context/UserContext";
-import { SpanSort } from "./SpanSort";
+export const Table = React.memo( ({ users }) => {
+  const { handleSort, setSortState, sortState } = useContext(UserContext);
 
-export const Table = () => {
-  const { handleSort, setSortState, sortState, userList, searchList } =
-    useContext(UserContext);
-  const users = searchList?.length >= 1 ? searchList : userList;
-
-  const onChangeSort = (sortType) => {
-    if (sortState.type === sortType) {
+  const onChangeSort = useCallback(
+    (sortType) => {
+      if (sortState.type === sortType) {
+        setSortState({
+          type: sortType,
+          ascending: !sortState.ascending,
+        });
+        return;
+      }
       setSortState({
         type: sortType,
-        ascending: !sortState.ascending,
+        ascending: true,
       });
       return;
-    }
-    setSortState({
-      type: sortType,
-      ascending: true,
-    });
-    return;
-  };
-
+    },[sortState.type]  
+  )
   useEffect(() => {
-    if (sortState.type !== null) {
+    if (sortState.type) {
       handleSort();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortState]);
 
+  
   return (
     <div className="table-container">
       <table className="styled-table">
@@ -43,29 +44,33 @@ export const Table = () => {
             <th>
               <div className="sort-column" onClick={() => onChangeSort("id")}>
                 ID
-                <SpanSort
-                  name={"id"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortNumericDown key="lowest" />,
-                    <BsSortNumericDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "id" && (
+                  <SpanSort
+                    name={"id"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortNumericDown key="lowest" />,
+                      <BsSortNumericDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
             <th>
               <div className="sort-column" onClick={() => onChangeSort("name")}>
                 Name
-                <SpanSort
-                  name={"name"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortAlphaDown key="lowest" />,
-                    <BsSortAlphaDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "name" && (
+                  <SpanSort
+                    name={"name"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortAlphaDown key="lowest" />,
+                      <BsSortAlphaDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
             <th>
@@ -74,29 +79,33 @@ export const Table = () => {
                 onClick={() => onChangeSort("username")}
               >
                 Username
-                <SpanSort
-                  name={"username"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortAlphaDown key="lowest" />,
-                    <BsSortAlphaDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "username" && (
+                  <SpanSort
+                    name={"username"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortAlphaDown key="lowest" />,
+                      <BsSortAlphaDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
             <th>
               <div className="sort-column" onClick={() => onChangeSort("city")}>
                 City
-                <SpanSort
-                  name={"city"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortAlphaDown key="lowest" />,
-                    <BsSortAlphaDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "city" && (
+                  <SpanSort
+                    name={"city"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortAlphaDown key="lowest" />,
+                      <BsSortAlphaDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
             <th>
@@ -105,15 +114,17 @@ export const Table = () => {
                 onClick={() => onChangeSort("email")}
               >
                 Email
-                <SpanSort
-                  name={"email"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortAlphaDown key="lowest" />,
-                    <BsSortAlphaDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "email" && (
+                  <SpanSort
+                    name={"email"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortAlphaDown key="lowest" />,
+                      <BsSortAlphaDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
             <th>
@@ -122,15 +133,17 @@ export const Table = () => {
                 onClick={() => onChangeSort("company")}
               >
                 Company
-                <SpanSort
-                  name={"company"}
-                  type={sortState.type}
-                  ascending={sortState.ascending}
-                  icons={[
-                    <BsSortAlphaDown key="lowest" />,
-                    <BsSortAlphaDownAlt key="highest" />,
-                  ]}
-                />
+                {sortState.type === "company" && (
+                  <SpanSort
+                    name={"company"}
+                    type={sortState.type}
+                    ascending={sortState.ascending}
+                    icons={[
+                      <BsSortAlphaDown key="lowest" />,
+                      <BsSortAlphaDownAlt key="highest" />,
+                    ]}
+                  />
+                )}
               </div>
             </th>
           </tr>
@@ -161,4 +174,7 @@ export const Table = () => {
       </table>
     </div>
   );
+})
+Table.propTypes = {
+  users: PropTypes.array,
 };
