@@ -1,5 +1,7 @@
 # Frontend Development Intern Assignment: Create a Customer Dashboard
 
+https://tablexample.netlify.app/
+
 ## Objective:
 
 The aim of this assignment is to create a simple customer dashboard. This will involve displaying data
